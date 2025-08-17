@@ -8,6 +8,7 @@ export default defineConfig({
   server: {
     port: 5174,
   },
+  base: "/react-admin-dashboard-basic-ui",
   resolve: {
     alias: {
       src: path.resolve(__dirname, "./src"),
