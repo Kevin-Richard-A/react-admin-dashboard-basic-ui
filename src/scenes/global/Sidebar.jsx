@@ -23,27 +23,33 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Sidebar = ({
+  isMd,
+  toggled,
+  handleToggle,
+  isCollapsed,
+  handleCollapse,
+}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{ color: colors.grey[100] }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-      component={<Link to={to} />}
-    >
-      <Typography>{title}</Typography>
-    </MenuItem>
-  );
-};
+  const [selected, setSelected] = useState("");
 
-const Sidebar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+  const Item = ({ title, to, icon, selected, setSelected }) => {
+    return (
+      <MenuItem
+        active={selected === title}
+        style={{ color: colors.grey[100] }}
+        onClick={() => {
+          setSelected(title);
+          handleToggle();
+        }}
+        icon={icon}
+        component={<Link to={to} />}
+      >
+        <Typography>{title}</Typography>
+      </MenuItem>
+    );
+  };
 
   return (
     <Box
@@ -67,11 +73,14 @@ const Sidebar = () => {
             backgroundColor: "transparent !important",
             color: "#868dfb !important",
           },
-          [`.${menuClasses.button}.active`]: {
-            color: "#6870fa !important",
+          [`.${menuClasses.active}`]: {
+            color: `${colors.greenAccent[400]} !important`,
           },
         }}
         collapsed={isCollapsed}
+        onBackdropClick={handleToggle}
+        toggled={toggled}
+        breakPoint={!isMd ? undefined : "all"}
       >
         <Menu
           iconShape="square"
@@ -83,7 +92,7 @@ const Sidebar = () => {
         >
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={(e) => handleCollapse(e, !isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
@@ -100,7 +109,7 @@ const Sidebar = () => {
                 <Typography variant="h3" color={colors.grey[100]}>
                   ADMINIS
                 </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                <IconButton onClick={(e) => handleCollapse(e, !isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>

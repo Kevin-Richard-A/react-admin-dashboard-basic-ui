@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
 import { mockTransactions } from "../../data/mockData";
@@ -13,16 +20,21 @@ import GeographyChart from "../../components/GeographyChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 
-const Dashboard = () => {
+const Dashboard = ({ isSm }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isXlDevices = useMediaQuery("(min-width: 1260px)");
+  const isMdDevices = useMediaQuery("(min-width: 724px)");
+  const isXsDevices = useMediaQuery("(max-width: 436px)");
 
   return (
     <Box m="20px">
       <Box
         display={"flex"}
+        flexDirection={isSm ? "column" : "row"}
         justifyContent={"space-between"}
-        alignItems={"center"}
+        alignItems={isSm ? undefined : "center"}
+        mb={!isSm ? undefined : "20px"}
       >
         <Header title={"DASHBOARD"} subtitle={"Welcome to your dashboard"} />
         <Box>
@@ -44,7 +56,13 @@ const Dashboard = () => {
       {/* GRID & CHARTs */}
       <Box
         display={"grid"}
-        gridTemplateColumns={"repeat(12, 1fr)"}
+        gridTemplateColumns={
+          isXlDevices
+            ? "repeat(12, 1fr)"
+            : isMdDevices
+            ? "repeat(6, 1fr)"
+            : "repeat(3, 1fr)"
+        }
         gridAutoRows="140px"
         gap="20px"
       >
@@ -140,7 +158,9 @@ const Dashboard = () => {
 
         {/* ROW 2 */}
         <Box
-          gridColumn={"span 8"}
+          gridColumn={
+            isXlDevices ? "span 8" : isMdDevices ? "span 6" : "span 3"
+          }
           gridRow={"span 2"}
           backgroundColor={colors.primary[400]}
         >
@@ -185,7 +205,7 @@ const Dashboard = () => {
 
         {/* TRANSACTIONS */}
         <Box
-          gridColumn={"span 4"}
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow={"span 2"}
           backgroundColor={colors.primary[400]}
           overflow={"auto"}
@@ -241,7 +261,7 @@ const Dashboard = () => {
 
         {/* ROW 3 */}
         <Box
-          gridColumn={"span 4"}
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow={"span 2"}
           backgroundColor={colors.primary[400]}
           p={"30px"}
@@ -269,7 +289,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={"span 4"}
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow={"span 2"}
           backgroundColor={colors.primary[400]}
         >
@@ -285,7 +305,7 @@ const Dashboard = () => {
           </Box>
         </Box>
         <Box
-          gridColumn={"span 4"}
+          gridColumn={isXlDevices ? "span 4" : "span 3"}
           gridRow={"span 2"}
           backgroundColor={colors.primary[400]}
           p={"30px"}

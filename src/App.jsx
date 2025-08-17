@@ -14,20 +14,44 @@ import Bar from "./scenes/bar";
 import Pie from "./scenes/pie";
 import Line from "./scenes/line";
 import Geography from "./scenes/geography";
+import { useState } from "react";
 
 const App = () => {
   const [theme, colorMode] = useMode();
+  const isMd = window.matchMedia("(max-width: 800px)").matches;
+  const isSm = window.matchMedia("(max-width: 450px)").matches;
+  const [toggled, setToggled] = useState(!isMd ? true : false);
+  const [isCollapsed, setIsCollapsed] = useState(isSm ? true : false);
+
+  const handleToggle = () => {
+    setToggled(!toggled);
+  };
+
+  const handleCollapse = (e, iscollapse) => {
+    setIsCollapsed(iscollapse);
+  };
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar />
+          <Sidebar
+            isMd={isMd}
+            toggled={toggled}
+            handleToggle={handleToggle}
+            isCollapsed={isCollapsed}
+            handleCollapse={handleCollapse}
+          />
           <main className="content" style={{ overflow: "auto" }}>
-            <Topbar />
+            <Topbar
+              isMd={isMd}
+              toggled={toggled}
+              handleToggle={handleToggle}
+              handleCollapse={handleCollapse}
+            />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard isSm={isSm} />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />
