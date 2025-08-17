@@ -66,6 +66,9 @@ const Invoices = () => {
             backgroundColor: `${colors.blueAccent[700]} !important`,
             borderBottom: "none",
           },
+          "& .MuiDataGrid-scrollbarFiller--header": {
+            backgroundColor: `${colors.blueAccent[700]} !important`,
+          },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],
           },

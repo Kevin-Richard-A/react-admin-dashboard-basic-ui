@@ -4,7 +4,7 @@ import { tokens } from "../theme";
 import { geoFeatures } from "../data/mockGeoFeatures";
 import { mockGeographyData as data } from "../data/mockData";
 
-const GeographyChart = ({ isDashborad = false }) => {
+const GeographyChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -15,7 +15,7 @@ const GeographyChart = ({ isDashborad = false }) => {
         axis: {
           domain: {
             line: {
-              stoke: colors.grey[100],
+              stroke: colors.grey[100],
             },
           },
           legend: {
@@ -50,12 +50,12 @@ const GeographyChart = ({ isDashborad = false }) => {
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
-      projectionScale={isDashborad ? 40 : 150}
-      projectionTranslation={isDashborad ? [0.49, 0.6] : [0.5, 0.5]}
+      projectionScale={isDashboard ? 40 : 150}
+      projectionTranslation={isDashboard ? [0.49, 0.6] : [0.5, 0.5]}
       borderWidth={1.5}
       borderColor="#ffffff"
       legends={
-        isDashborad
+        isDashboard
           ? undefined
           : [
               {

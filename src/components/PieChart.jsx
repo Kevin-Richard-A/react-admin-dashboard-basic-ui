@@ -14,7 +14,7 @@ const PieCharts = () => {
         axis: {
           domain: {
             line: {
-              stoke: colors.grey[100],
+              stroke: colors.grey[100],
             },
           },
           legend: {

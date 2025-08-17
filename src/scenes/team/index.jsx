@@ -43,10 +43,12 @@ const Team = () => {
       field: "access",
       headerName: "Access Level",
       flex: 1,
+      cellClassName: "access-column--cell",
       renderCell: ({ row: { access } }) => {
         return (
           <Box
-            width="60%"
+            width={"60%"}
+            minWidth={"100px"}
             m="0 auto"
             p="5px"
             display={"flex"}
@@ -54,7 +56,9 @@ const Team = () => {
             backgroundColor={
               access === "admin"
                 ? colors.greenAccent[600]
-                : colors.greenAccent[700]
+                : access === "manager"
+                ? colors.greenAccent[700]
+                : colors.greenAccent[800]
             }
             borderRadius={"4px"}
           >
@@ -76,6 +80,7 @@ const Team = () => {
       <Box
         m="40px 0 0 0"
         height={"75vh"}
+        width={"100%"}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -86,9 +91,17 @@ const Team = () => {
           "& .name-column--cell": {
             color: colors.greenAccent[300],
           },
+          "& .access-column--cell": {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: `${colors.blueAccent[700]} !important`,
             borderBottom: "none",
+          },
+          "& .MuiDataGrid-scrollbarFiller--header": {
+            backgroundColor: `${colors.blueAccent[700]} !important`,
           },
           "& .MuiDataGrid-virtualScroller": {
             backgroundColor: colors.primary[400],

@@ -24,7 +24,7 @@ const App = () => {
         <CssBaseline />
         <div className="app">
           <Sidebar />
-          <main className="content">
+          <main className="content" style={{ overflow: "auto" }}>
             <Topbar />
             <Routes>
               <Route path="/" element={<Dashboard />} />

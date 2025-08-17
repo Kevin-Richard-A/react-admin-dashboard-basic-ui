@@ -3,7 +3,7 @@ import { useTheme } from "@emotion/react";
 import { tokens } from "../theme";
 import { mockBarData as data } from "../data/mockData";
 
-const BarChart = ({ isDashborad = false }) => {
+const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -45,7 +45,11 @@ const BarChart = ({ isDashborad = false }) => {
       }}
       keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
       indexBy="country"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={
+        isDashboard
+          ? { top: 50, right: 100, bottom: 50, left: 40 }
+          : { top: 50, right: 130, bottom: 50, left: 60 }
+      }
       padding={0.3}
       enableLabel={false}
       labelSkipWidth={5}
@@ -62,10 +66,10 @@ const BarChart = ({ isDashborad = false }) => {
         },
       ]}
       axisBottom={{
-        legend: isDashborad ? undefined : "country",
+        legend: isDashboard ? undefined : "country",
         legendOffset: 32,
       }}
-      axisLeft={{ legend: isDashborad ? undefined : "food", legendOffset: -40 }}
+      axisLeft={{ legend: isDashboard ? undefined : "food", legendOffset: -40 }}
     />
   );
 };

@@ -183,6 +183,7 @@ const Contacts = () => {
       <Box
         m="40px 0 0 0"
         height={"75vh"}
+        width={"100%"}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -197,8 +198,11 @@ const Contacts = () => {
             backgroundColor: `${colors.blueAccent[700]} !important`,
             borderBottom: "none",
           },
+          "& .MuiDataGrid-scrollbarFiller--header": {
+            backgroundColor: `${colors.blueAccent[700]} !important`,
+          },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: `${colors.primary[400]} !important`,
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
