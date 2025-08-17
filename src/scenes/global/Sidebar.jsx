@@ -9,6 +9,7 @@ import {
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
+import user from "../../assets/user.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -114,7 +115,7 @@ const Sidebar = () => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`/src/assets/user.png`}
+                  src={`${user}`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
