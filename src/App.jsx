@@ -38,6 +38,7 @@ const App = () => {
         <div className="app">
           <Sidebar
             isMd={isMd}
+            isSm={isSm}
             toggled={toggled}
             handleToggle={handleToggle}
             isCollapsed={isCollapsed}

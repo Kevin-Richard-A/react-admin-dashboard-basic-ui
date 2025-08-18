@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Sidebar as ProSidebar,
   sidebarClasses,
@@ -25,6 +25,7 @@ import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 const Sidebar = ({
   isMd,
+  isSm,
   toggled,
   handleToggle,
   isCollapsed,
@@ -32,7 +33,14 @@ const Sidebar = ({
 }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [selected, setSelected] = useState("");
+
+  const [selected, setSelected] = useState(
+    sessionStorage.getItem("selectedPage") || "Dashboard"
+  );
+
+  useEffect(() => {
+    sessionStorage.setItem("selectedPage", selected);
+  }, [selected]);
 
   const Item = ({ title, to, icon, selected, setSelected }) => {
     return (
@@ -41,7 +49,7 @@ const Sidebar = ({
         style={{ color: colors.grey[100] }}
         onClick={() => {
           setSelected(title);
-          handleToggle();
+          isSm && handleToggle();
         }}
         icon={icon}
         component={<Link to={to} />}
